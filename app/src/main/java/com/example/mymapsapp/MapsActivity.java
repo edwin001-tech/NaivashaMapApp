@@ -61,8 +61,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         markerArrayList = new ArrayList<>();
+        markerOptionsList = new ArrayList<>();
 
-        everestMarker = mMap.addMarker(new MarkerOptions()
+        everestOptions = new MarkerOptions().position(mountEverest)
+                .title("Everest")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+
+        markerOptionsList.add(everestOptions);
+
+        theAlpsOptions = new MarkerOptions().position(theAlps)
+                .title("Alps")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+        markerOptionsList.add(theAlpsOptions);
+
+        /*everestMarker = mMap.addMarker(new MarkerOptions()
                .position(mountEverest)
                .title("Mt. Everest")
                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
@@ -81,14 +94,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .title("The Alps")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
 
-                 markerArrayList.add(theAlpsMarker);
+                 markerArrayList.add(theAlpsMarker);*/
 
+        for (MarkerOptions options : markerOptionsList) {
+            LatLng latLng = new LatLng(options.getPosition().latitude, options.getPosition().longitude);
+            mMap.addMarker(options);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10)); // 1 - 20
+
+
+            //Log.d(TAG, "onMapReady: " + marker.getTitle());
+        }
+/*
         for (Marker marker : markerArrayList) {
             LatLng latLng = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
             mMap.addMarker(new MarkerOptions().position(latLng));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 4)); // 1 - 20
             Log.d(TAG, "onMapReady: " + marker.getTitle());
-        }
+        }*/
 
         // Add a marker in Sydney and move the camera
         /*LatLng naivasha = new LatLng(0.7172, 36.4310);
