@@ -42,7 +42,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng naivasha = new LatLng(0.7172, 36.4310);
         mMap.addMarker(new MarkerOptions().position(naivasha).title("Marker in Naivasha")
-        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+        .alpha(0.9f));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(naivasha,8));
     }
 }
